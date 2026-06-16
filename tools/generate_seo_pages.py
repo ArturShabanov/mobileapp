@@ -391,6 +391,7 @@ def render_page(page: dict) -> str:
   <meta property="og:url" content="{url}">
   <meta property="og:title" content="{esc(page['title'])}">
   <meta property="og:description" content="{esc(page['description'])}">
+  <meta property="og:image" content="{DOMAIN}/assets/seo/{page['slug']}.jpg">
   <meta property="og:locale" content="ru_KZ">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -436,9 +437,12 @@ def render_page(page: dict) -> str:
             <a href="/#pricing" class="btn btn--ghost btn--lg">Смотреть цены</a>
           </div>
         </div>
-        <aside class="service-hero__aside">
-          <strong>Что делаем</strong>
-          <span>MVP, дизайн, backend, админка, интеграции, публикация и поддержка.</span>
+        <aside class="service-hero__aside service-hero__image">
+          <img src="/assets/seo/{page['slug']}.jpg" alt="{esc(page['h1'])}" width="1400" height="933" loading="eager" decoding="async">
+          <div>
+            <strong>Что делаем</strong>
+            <span>MVP, дизайн, backend, админка, интеграции, публикация и поддержка.</span>
+          </div>
         </aside>
       </div>
     </section>
