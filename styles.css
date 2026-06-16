@@ -702,6 +702,21 @@ ul {
   color: var(--text-muted);
 }
 
+.service-hero__visual {
+  padding: 0;
+  overflow: hidden;
+}
+
+.service-hero__visual img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+
+.service-hero__visual div {
+  padding: 20px 24px 24px;
+}
+
 .service-nav-section {
   padding: 34px 0;
 }
