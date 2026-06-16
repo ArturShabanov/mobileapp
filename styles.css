@@ -654,6 +654,18 @@ ul {
   background:
     radial-gradient(ellipse 80% 50% at 50% -20%, rgba(91, 140, 255, 0.2), transparent),
     var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-hero--crm {
+  min-height: 720px;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(10, 11, 16, 0.96) 0%, rgba(10, 11, 16, 0.78) 36%, rgba(10, 11, 16, 0.28) 68%, rgba(10, 11, 16, 0.64) 100%),
+    linear-gradient(180deg, rgba(10, 11, 16, 0.34), rgba(10, 11, 16, 0.78)),
+    url("/assets/crm-hero.png") center / cover no-repeat;
 }
 
 .service-hero__grid {
@@ -675,6 +687,14 @@ ul {
   max-width: 720px;
   color: var(--text-muted);
   font-size: 1.12rem;
+}
+
+.service-hero--crm .service-hero__grid {
+  grid-template-columns: minmax(0, 720px);
+}
+
+.service-hero--crm p {
+  color: #d7dbe5;
 }
 
 .service-hero__aside,
