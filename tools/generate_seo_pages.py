@@ -379,6 +379,11 @@ def render_page(page: dict) -> str:
         f"<details class=\"faq-item\"><summary>{esc(q)}</summary><p>{esc(a)}</p></details>"
         for q, a in page["faqs"]
     )
+    hero_class = "service-hero service-hero--crm" if page["slug"] == "crm-development" else "service-hero service-hero--app"
+    hero_aside = "" if page["slug"] == "crm-development" else """        <aside class="service-hero__aside">
+          <strong>Что делаем</strong>
+          <span>MVP, дизайн, backend, админка, интеграции, публикация и поддержка.</span>
+        </aside>"""
     return f"""<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -396,10 +401,10 @@ def render_page(page: dict) -> str:
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=seo">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
-  <link rel="apple-touch-icon" href="/assets/favicon-512.png">
+  <link rel="stylesheet" href="../styles.css?v=seo">
+  <link rel="icon" href="../favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="apple-touch-icon" href="../assets/favicon-512.png">
   <meta name="theme-color" content="#090b1a">
   <script type="application/ld+json">
 {schema_for(page)}
@@ -425,7 +430,7 @@ def render_page(page: dict) -> str:
   </header>
 
   <main>
-    <section class="service-hero">
+    <section class="{hero_class}">
       <div class="container service-hero__grid">
         <div>
           <p class="badge">MobileApp.kz · Казахстан</p>
@@ -436,10 +441,7 @@ def render_page(page: dict) -> str:
             <a href="/#pricing" class="btn btn--ghost btn--lg">Смотреть цены</a>
           </div>
         </div>
-        <aside class="service-hero__aside">
-          <strong>Что делаем</strong>
-          <span>MVP, дизайн, backend, админка, интеграции, публикация и поддержка.</span>
-        </aside>
+{hero_aside}
       </div>
     </section>
 
@@ -515,7 +517,7 @@ def render_page(page: dict) -> str:
       <path d="M16.04 4C9.4 4 4 9.31 4 15.85c0 2.09.56 4.13 1.63 5.92L4 28l6.4-1.62a12.2 12.2 0 0 0 5.64 1.38C22.69 27.76 28 22.45 28 15.9 28 9.35 22.69 4 16.04 4Zm0 21.76c-1.78 0-3.53-.48-5.04-1.38l-.36-.22-3.8.96.98-3.63-.24-.38A9.85 9.85 0 0 1 6 15.85C6 10.42 10.5 6 16.04 6 21.56 6 26 10.43 26 15.9c0 5.44-4.44 9.86-9.96 9.86Zm5.5-7.36c-.3-.15-1.78-.87-2.05-.96-.28-.1-.48-.15-.68.15-.2.3-.78.96-.96 1.16-.18.2-.35.22-.65.08-.3-.15-1.27-.46-2.42-1.48-.9-.79-1.5-1.76-1.68-2.06-.18-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.68-1.61-.93-2.21-.24-.58-.49-.5-.68-.51h-.58c-.2 0-.52.07-.8.37-.28.3-1.05 1.01-1.05 2.46s1.08 2.86 1.23 3.06c.15.2 2.12 3.18 5.14 4.46.72.31 1.28.5 1.72.64.72.23 1.38.2 1.9.12.58-.09 1.78-.72 2.03-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35Z"/>
     </svg>
   </a>
-  <script src="/script.js?v=5"></script>
+  <script src="../script.js?v=5"></script>
 </body>
 </html>
 """
