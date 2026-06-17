@@ -380,10 +380,6 @@ def render_page(page: dict) -> str:
         for q, a in page["faqs"]
     )
     hero_class = "service-hero service-hero--crm" if page["slug"] == "crm-development" else "service-hero service-hero--app"
-    hero_aside = "" if page["slug"] == "crm-development" else """        <aside class="service-hero__aside">
-          <strong>Что делаем</strong>
-          <span>MVP, дизайн, backend, админка, интеграции, публикация и поддержка.</span>
-        </aside>"""
     return f"""<!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -441,7 +437,6 @@ def render_page(page: dict) -> str:
             <a href="/#pricing" class="btn btn--ghost btn--lg">Смотреть цены</a>
           </div>
         </div>
-{hero_aside}
       </div>
     </section>
 
