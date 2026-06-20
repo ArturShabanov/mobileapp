@@ -2,9 +2,35 @@
   const WA_PHONE = "77004320505";
   const WA_DISPLAY = "+7 700 432 05 05";
   const WA_BASE = `https://wa.me/${WA_PHONE}`;
+  const LEAD_EVENT_NAME = "whatsapp_lead";
+  const LEAD_EVENT_TIMEOUT = 1500;
 
   function buildWaUrl(text) {
     return text ? `${WA_BASE}?text=${encodeURIComponent(text)}` : WA_BASE;
+  }
+
+  function trackLeadEvent(done) {
+    let completed = false;
+
+    function finish() {
+      if (completed) return;
+      completed = true;
+      done();
+    }
+
+    if (typeof window.gtag === "function") {
+      window.gtag("event", LEAD_EVENT_NAME, {
+        source: "website",
+        form: "contact",
+        event_callback: finish,
+        event_timeout: LEAD_EVENT_TIMEOUT,
+      });
+
+      window.setTimeout(finish, LEAD_EVENT_TIMEOUT + 300);
+      return;
+    }
+
+    finish();
   }
 
   const yearEl = document.getElementById("year");
@@ -134,13 +160,24 @@
       const message = data.get("message") || "";
 
       const text = `Заявка с mobileapp.kz\nПроект: ${project}\nТелефон: ${phone}${message ? "\nКомментарий: " + message : ""}`;
+      const whatsappUrl = buildWaUrl(text);
+      const whatsappWindow = window.open("about:blank", "_blank");
+      if (whatsappWindow) {
+        whatsappWindow.opener = null;
+      }
 
       if (success) {
         success.hidden = false;
         form.querySelector('button[type="submit"]').disabled = true;
       }
 
-      window.open(buildWaUrl(text), "_blank", "noopener");
+      trackLeadEvent(() => {
+        if (whatsappWindow) {
+          whatsappWindow.location.href = whatsappUrl;
+        } else {
+          window.location.href = whatsappUrl;
+        }
+      });
     });
   }
 
