@@ -19,6 +19,7 @@ COMMON_HEAD = """  <!-- Google tag (gtag.js) -->
     gtag('js', new Date());
 
     gtag('config', 'AW-18126512497');
+    gtag('config', 'G-MHQBQCYL6B');
   </script>
 """
 
