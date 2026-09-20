@@ -40,6 +40,46 @@
     measureDemo();
   }
 
+  document.querySelectorAll('.project-screenshots').forEach(function (gallery, galleryIndex) {
+    const slides = Array.from(gallery.children);
+    gallery.id = 'project-slides-' + galleryIndex;
+    const controls = document.createElement('div');
+    controls.className = 'screenshot-controls';
+    const dots = document.createElement('div');
+    dots.className = 'screenshot-dots';
+    dots.setAttribute('role', 'group');
+    dots.setAttribute('aria-label', gallery.getAttribute('aria-label'));
+    const count = document.createElement('span');
+    count.className = 'screenshot-count';
+    const buttons = slides.map(function (slide, index) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'screenshot-dot';
+      button.setAttribute('aria-label', 'Скриншот ' + (index + 1) + ' из ' + slides.length);
+      button.setAttribute('aria-controls', gallery.id);
+      button.addEventListener('click', function () {
+        gallery.scrollTo({ left: slide.offsetLeft - slides[0].offsetLeft, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      });
+      dots.append(button);
+      return button;
+    });
+    function updateSlide() {
+      const end = gallery.scrollWidth - gallery.clientWidth;
+      let active = 0;
+      if (end > 0 && gallery.scrollLeft >= end - 2) active = slides.length - 1;
+      else slides.forEach(function (slide, index) {
+        if (Math.abs(slide.offsetLeft - slides[0].offsetLeft - gallery.scrollLeft) < Math.abs(slides[active].offsetLeft - slides[0].offsetLeft - gallery.scrollLeft)) active = index;
+      });
+      buttons.forEach(function (button, index) { button.setAttribute('aria-current', String(index === active)); });
+      count.textContent = (active + 1) + ' / ' + slides.length;
+    }
+    controls.append(dots, count);
+    gallery.after(controls);
+    gallery.addEventListener('scroll', updateSlide, { passive: true });
+    new ResizeObserver(updateSlide).observe(gallery);
+    updateSlide();
+  });
+
   function track(event, data) {
     if (typeof window.gtag === 'function') window.gtag('event', event, data || {});
   }

@@ -51,7 +51,7 @@ html[data-theme="dark"]{--paper:#181b19;--surface:#202521;--ink:#f1f3ef;--muted:
 .project-screenshots a:hover{transform:translateY(-3px)}
 @media(prefers-reduced-motion:reduce){.project-screenshots a{transition:none}.project-screenshots a:hover{transform:none}}
 
-/* Each app has a full-width gallery; every screenshot is visible without a carousel. */
+/* Full gallery on desktop; swipeable slides on mobile. */
 .portfolio-grid{grid-template-columns:1fr;gap:64px}
 .portfolio-card{display:grid;grid-template-columns:120px minmax(0,1fr);gap:24px;align-items:center}
 .portfolio-image.portfolio-icon{grid-column:1;grid-row:1;height:auto;padding:0;justify-content:start}
@@ -60,7 +60,21 @@ html[data-theme="dark"]{--paper:#181b19;--surface:#202521;--ink:#f1f3ef;--muted:
 .portfolio-info>p{margin-bottom:8px}.portfolio-info h3{margin-bottom:6px}
 .project-screenshots{grid-column:1/-1;grid-row:2;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin-top:0}
 .pricing-grid{grid-template-columns:minmax(0,640px)}
+.screenshot-controls{display:none}
 @media(max-width:767px){.portfolio-card{grid-template-columns:76px minmax(0,1fr);gap:20px 16px}.portfolio-image.portfolio-icon img{width:76px;height:76px;border-radius:18px}.portfolio-info h3{font-size:23px}.project-screenshots{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.portfolio-grid{gap:48px}}
+@media(max-width:767px){
+  .project-screenshots{display:flex;overflow-x:auto;min-width:0;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none;border-radius:12px}
+  .project-screenshots::-webkit-scrollbar{display:none}
+  .project-screenshots a{flex:0 0 84%;max-width:300px;scroll-snap-align:start;scroll-snap-stop:always}
+  .project-screenshots a:hover{transform:none}
+  .screenshot-controls{display:flex;grid-column:1/-1;grid-row:3;align-items:center;justify-content:space-between;gap:12px;margin-top:-8px}
+  .screenshot-dots{display:flex;gap:0}
+  .screenshot-dot{width:32px;height:36px;padding:0;display:grid;place-items:center;background:none;border:0;color:var(--ink);cursor:pointer}
+  .screenshot-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.22}
+  .screenshot-dot[aria-current="true"]::before{width:18px;border-radius:6px;opacity:1}
+  .screenshot-dot:focus-visible{outline:2px solid var(--ink);outline-offset:0;border-radius:6px}
+  .screenshot-count{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+}
 
 /* Text-only brand wordmark. */
 .header-row{justify-content:flex-start}
