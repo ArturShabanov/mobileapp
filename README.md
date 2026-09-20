@@ -23,13 +23,11 @@ python3 -m http.server 8080
 
 Текущая версия опубликована на VPS через Nginx:
 
-- адрес: `https://mobileapp.185-212-129-244.sslip.io/`;
+- основной адрес: `https://mobileapp.kz/`;
+- `www.mobileapp.kz`, HTTP и временный адрес `sslip.io` перенаправляются на основной адрес;
 - каталог: `/var/www/mobileapp/current`;
 - конфигурация Nginx: `deploy/mobileapp.nginx.conf`;
-- HTTPS выпускается и продлевается через Certbot.
-
-При подключении постоянного домена добавьте его в `server_name`, затем
-выпустите для него отдельный сертификат Certbot.
+- HTTPS для `mobileapp.kz` и `www.mobileapp.kz` выпускается и автоматически продлевается через Certbot.
 
 ## Портфолио
 
