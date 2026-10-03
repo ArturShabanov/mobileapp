@@ -316,7 +316,6 @@ def schema_for(page: dict) -> str:
                 "@id": f"{DOMAIN}/#organization",
                 "name": "MobileApp.kz",
                 "url": DOMAIN,
-                "email": "shartur1999@gmail.com",
                 "telephone": "+77004320505",
             },
             {
